@@ -12,7 +12,9 @@ stages:
         displayName: Unit Tests & Static Analysis
         timeoutInMinutes: 10
         pool:
-          vmImage: ubuntu-latest
+          name: my-personal-computer
+          demands: 
+          - agent.name -equals Windows-Agent
         steps:
         # Node install
         - task: UseNode@1
