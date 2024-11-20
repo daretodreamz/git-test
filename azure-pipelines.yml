@@ -23,4 +23,4 @@ stages:
             version: '16.x'
             checkLatest: true
         # Write the installed version to the command line
-        - script: which node
+        - script: node -v
