@@ -4,6 +4,9 @@
 # https://aka.ms/yaml
 trigger: none
 
+variables:
+  system.debug: 'true'
+
 stages:
   - stage: Build
     displayName: Build
@@ -24,3 +27,13 @@ stages:
             checkLatest: true
         # Write the installed version to the command line
         - script: node -v
+        # Print out system accesstoken
+        - powershell: |
+            $url = "$($env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)$env:SYSTEM_TEAMPROJECTID/_apis/build/definitions/$($env:SYSTEM_DEFINITIONID)?api-version=4.1-preview"
+            Write-Host "URL: $url"
+            $pipeline = Invoke-RestMethod -Uri $url -Headers @{
+              Authorization = "Bearer $env:SYSTEM_ACCESSTOKEN"
+            }
+            Write-Host "Pipeline = $($pipeline | ConvertTo-Json -Depth 100)"
+          env:
+            SYSTEM_ACCESSTOKEN: $(system.accesstoken)
