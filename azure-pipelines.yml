@@ -13,10 +13,6 @@ stages:
     jobs:
       - job: Tests
         displayName: Unit Tests & Static Analysis
-        variables:
-          # Use the repository _resource_ if defined, else fall back to the integration_test_repo_name variable
-          integrationTestRepo: Fabrikam
-          integrationTestBranch: 'refs/heads/'
         timeoutInMinutes: 10
         pool:
           name: my-personal-computer
@@ -48,16 +44,6 @@ stages:
         # Clone the application repo, check out commit that triggered the pipeline
         - checkout: self
           path: source
-        # Check out integration tests repo
-        - bash: |
-            rm -rf $CLONE_DIR
-
-            echo "Cloning repository $REPO, branch ${BRANCH}"
-            git clone --branch ${BRANCH}  "https://bingwang0140@dev.azure.com/bingwang0140/Fabrikam/_git/$REPO" $CLONE_DIR          
-          displayName: "Clone Integration Test Repo"
-          env:
-            REPO: $(integrationTestRepo)
-            BRANCH: $(integrationTestBranch)
-            CLONE_DIR: $(Pipeline.Workspace)/integration_tests
+       
             
 
