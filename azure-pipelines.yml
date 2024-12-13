@@ -38,3 +38,9 @@ stages:
             Write-Host "Print out system accesstoken = $(system.accesstoken)"
           env:
             SYSTEM_ACCESSTOKEN: $(system.accesstoken)
+      - job: Debug1
+        displayName: print Pipeline Workspace
+        steps:
+        - script: |
+           echo "Current value of this built-in variable is: $(Pipeline.Workspace)"
+
