@@ -40,5 +40,8 @@ stages:
             SYSTEM_ACCESSTOKEN: $(system.accesstoken)
         - script: |
            echo "Current value of this built-in variable is: $(Pipeline.Workspace)"
-          displayName: '1'
+          displayName: 'Pipeline.Workspace'
+        # Clone the application repo, check out commit that triggered the pipeline
+        - checkout: self
+          path: source
 
