@@ -15,7 +15,7 @@ stages:
         displayName: Unit Tests & Static Analysis
         variables:
           # Use the repository _resource_ if defined, else fall back to the integration_test_repo_name variable
-          integrationTestRepo: 'Fabrikam'
+          integrationTestRepo: Fabrikam
           integrationTestBranch: 'refs/heads/'
         timeoutInMinutes: 10
         pool:
